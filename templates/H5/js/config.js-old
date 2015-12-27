@@ -1,0 +1,44 @@
+﻿var signature;
+if(window.location.search=="?from=groupmessage&isappinstalled=0")
+	signature = "b239fa44f1640a7b014a661b713dfd78c7bb29b9";
+else if(window.location.search=="?from=singlemessage&isappinstalled=0")
+	signature = "e3735eb6886a5a41cbd947ef73e5bf3366e051db";
+
+wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: 'wx19eaf8f3329391fe', // 必填，公众号的唯一标识
+    timestamp: 1414587457, // 必填，生成签名的时间戳
+    nonceStr: 'qazwsx', // 必填，生成签名的随机串
+    signature: signature,// 必填，签名，见附录1
+    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
+
+
+wx.ready(function(){
+	wx.onMenuShareTimeline({
+		title: '爸爸去哪儿', // 分享标题
+		link: 'http://www.contineomarketing.cn/site/index.html', // 分享链接
+		imgUrl: 'http://www.contineomarketing.cn/site/images/landing_logo.png', // 分享图标
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+		}
+	});
+	
+	wx.onMenuShareAppMessage({
+		title: '爸爸去哪儿', // 分享标题
+		desc: '爸爸去哪儿-西澳', // 分享描述
+		link: 'http://www.contineomarketing.cn/site/index.html', // 分享链接
+		imgUrl: 'http://www.contineomarketing.cn/site/images/landing_logo.png', // 分享图标
+		type: '', // 分享类型,music、video或link，不填默认为link
+		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () { 
+			// 用户确认分享后执行的回调函数
+		},
+		cancel: function () { 
+			// 用户取消分享后执行的回调函数
+		}
+	});
+});
